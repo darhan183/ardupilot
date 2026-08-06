@@ -11,5 +11,3 @@
 #### <u>Subsystems of Multirotor</u>:
 
 - 
-
-
