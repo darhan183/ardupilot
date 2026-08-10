@@ -329,8 +329,6 @@
     where -35.36392632 is LAT
     149.16351793 is LON
     50 is Altitude
-    
-    
 
 - ##### Flying a Mission:-
   
