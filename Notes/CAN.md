@@ -41,5 +41,3 @@
     <img title="" src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-11-21-49-31-image.png" alt="" width="428">
 
 - 
-
-
