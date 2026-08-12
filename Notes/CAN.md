@@ -40,4 +40,24 @@
     
     <img title="" src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-11-21-49-31-image.png" alt="" width="428">
 
-- 
+- <b><u>CAN Frame</u>:</b> 
+  
+   <img title="" src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-12-13-45-47-image.png" alt="" width="570">
+  
+  - The CAN date frame fields are given below:
+    
+    - <b><u>Start Of Frame(SOF)</u>:</b> is a `dominant 0` to tell the other nodes that a CAN node intends to talk.
+    
+    - <b><u>ID</u>:</b> is the frame identifier - lower values have higher priority.
+    
+    - <b><u>Remote Transmission Request(RTR)</u>:</b>  indicates whether a node sends data or requests dedicated data from another node.
+    
+    - <b><u>Control</u>:</b> contains the `Identifier Extension Bit (IDE)` which is a `dominant 0` for 11-bit. It also contains the `4 bit Data Length Code (DLC)` that specifies the length of the data bytes to be transmitted (0 to 8 bytes).
+    
+    - <b><u>Data</u>:</b> contains the data bytes aka payload, which includes CAN signals that can be decoded for information.
+    
+    - <b><u>Cyclic Redundancy Check(CRC)</u>:</b> is used to ensure data integrity.
+    
+    - <b><u>Acknowledgement(ACK)</u>:</b>  slot indicates if the node has acknowledged and received the data correctly.
+    
+    - <b><u>End of Frame(EOF)</u>:</b> marks the end of the CAN frame. 
