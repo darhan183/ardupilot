@@ -42,7 +42,7 @@
 
 - <b><u>CAN Frame</u>:</b> 
   
-   <img title="" src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-12-13-45-47-image.png" alt="" width="570">
+  <img title="" src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-12-13-45-47-image.png" alt="" width="570">
   
   - The CAN date frame fields are given below:
     
