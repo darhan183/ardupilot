@@ -218,4 +218,345 @@
 
 - `DroneCAN` uses only `CAN 2.0B` frame format (29-bit identifiers). DroneCAN can share the same bus with other protocols based on `CAN 2.0A` (11-bit identifiers).
 
-- 
+- <b><u>ID Field</u></b>: 
+  
+  1. <b><u>Message Frame</u>:</b> Contents of the CAN ID field depend on the transfer type.
+     
+     <img src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-13-12-51-51-image.png" title="" alt="" width="645">
+     
+     | Field               | Bits | Allowed Values | Description                         |
+     |:-------------------:|:----:|:--------------:|:-----------------------------------:|
+     | Priority            | 5    | Any            |                                     |
+     | Message Type ID     | 16   | Any            | Data type ID of the encoded message |
+     | Service not message | 1    | 0              | Always Zero                         |
+     | Source Node ID      | 7    | 1-127          |                                     |
+  
+  2- <b><u>Anonymous Message Frame</u>:</b> 
+  
+  <img src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-13-13-13-48-image.png" title="" alt="" width="718">
+  
+  | Field                         | Bits | Allowed Values | Description                         |
+  |:-----------------------------:|:----:|:--------------:|:-----------------------------------:|
+  | Priority                      | 5    | Any            |                                     |
+  | Discriminator                 | 14   | Any            |                                     |
+  | Lower bits of message type ID | 2    | Any            | Data type ID of the encoded message |
+  | Service not message           | 1    | 0              | Always zero                         |
+  | Source node ID                | 7    | 0              | Always zero                         |
+  
+  3- <b><u>Service Message Frame</u>:</b>
+  
+     <img src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-13-13-23-55-image.png" title="" alt="" width="725"> 
+  
+  | Field                | Bits | Allowed Values | Description                                                         |
+  |:--------------------:|:----:|:--------------:|:-------------------------------------------------------------------:|
+  | Priority             | 5    | Any            |                                                                     |
+  | Service type ID      | 8    | Any            | Data type ID of the encoded service request or response             |
+  | Request not response | 1    | Any            | Values: 1 - service request transfer, 0 - service response transfer |
+  | Destination node ID  | 7    | 1-127          |                                                                     |
+  | Service not message  | 1    | 1              | Always one                                                          |
+  | Source node ID       | 7    | 1-127          |                                                                     |
+  
+  - <b>Priority</b>: Valid values for priority range from 0 to 31, inclusively, where 0 corresponds to highest priority (and 31 corresponds to lowest priority).
+    
+    - In `multi-frame transfers`, the value of the `priority` field must be identical for all frames of the transfer.
+  
+  - <b>Message Type ID</b>: Valid values of message type ID range from 0 to 65535, inclusively.
+    
+    - Valid values of message type ID range for `anonymous message transfers` range from 0 to 3, inclusively. This limitation is due to the fact that only 2 lower bits of the message type ID are available in this case.
+  
+  - <b>Service Type</b>: Valid values of service type ID range from 0 to 255, inclusively.
+  
+  - <b>Node ID</b>: Valid values of Node ID range from 1 to 127, inclusively.
+
+---
+
+#### <u>Payload</u>:
+
+<img src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-13-14-13-42-image.png" title="" alt="" width="478">
+
+| Field            | Description                                                                                |
+|:----------------:|:------------------------------------------------------------------------------------------:|
+| Transfer Payload | Actual payload of the transfer                                                             |
+| Tail byte        | The last byte of the CAN frame data field, which contains auxiliary transport layer fields |
+
+- The tail byte contains the following fields, starting from the most significant bit:
+  
+  | Field             | Bits |
+  |:-----------------:|:----:|
+  | Start of transfer | 1    |
+  | End of transfer   | 1    |
+  | Toggle bit        | 1    |
+  | Transfer ID       | 5    |
+
+- <b>Single Frame Transfer:</b> 
+  
+  <img src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-13-19-47-56-image.png" title="" alt="" width="714">
+  
+                              Data Frame of Single CAN frame
+
+- <b>Multi Frame Transfer:</b> 
+  
+  <img src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-13-19-49-17-image.png" title="" alt="" width="720">
+  
+                            Data Frame of First CAN frame
+  
+  <img src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-13-19-49-46-image.png" title="" alt="" width="719">
+  
+                 Data Field of Following CAN frames except the last one
+  
+  <img src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-08-13-19-50-02-image.png" title="" alt="" width="722">
+  
+                                Data Field of last CAN Frame
+  
+  - The tail byte contains the following fields,
+    
+    - ****Start of Transfer(SOF)****: For single-frame transfers, `Start of Transfer (SOF) = 1`.
+      
+      - For multi-frame transfers, `Start of Transfer (SOF) = 1` if current frame is `first frame` of transfer & `SOF = 0` otherwise.
+    
+    - ****End of Transfer(EOF):**** For single-frame transfers, `EOF = 1`.
+      
+      - For multi-frame transfers, `EOF = 1` if the current frame is the `last frame` of the transfer & `EOF = 0` otherwise.
+    
+    - ****Toggle Bit:**** For single-frame transfers, `Toggle Bit = 0`.
+      
+      - For `multi-frame transfers`, this field contains the value of the toggle bit. This will alternate value between frames, starting at `0` for the first frame.
+    
+    - <b>Transfer ID:</b> This field contains the transfer ID value of the current transfer for all types of transfers.
+      
+      - The value is 5 bits wide, therefore the allowed values range from 0 to 31, inclusively.
+
+---
+
+### <u>Data Structure Description Language(DSDL)</u>: [Data structure description language - DroneCAN](https://dronecan.github.io/Specification/3._Data_structure_description_language/)
+
+- is used to define data structures for exchange via the CAN bus.
+
+- The `DSDL definitions` are used to automatically generate the message `serialization/deserialization` code for a certain programming language.
+
+- The tool that generates source code from DSDL definition files is called the `DSDL compiler`.
+
+- <b> <u>File Hierarchy</u></b>:
+  
+  - Each DSDL definition file specifies exactly one data structure that can be used for message broadcasting.
+  
+  - The DSDL source file must be named using the `data type name` and `default data type ID`  as shown below:
+    
+    - ```bash
+      [default data type ID.]<data type name>.uavcan
+      ```
+  
+  - A defined data structure must be contained in a `namespace`, which may in turn to be `nested` within another namespace.
+  
+  - A namespace that is not nested in another namespace is called a `root namespace`.
+  
+  - For example, all standard data types are contained in the root namespace `uavcan`, which contains nested namespaces: `equipment`, `protocol`, etc.
+    
+    ```bash
+    + uavcan                        <-- Root namespace
+        + equipment                 <-- Nested namespace
+            + ...
+        + protocol                  <-- Nested namespace
+            + 341.NodeStatus.uavcan <-- Definition of data type "uavcan.protocol.NodeStatus" with default data type ID 341
+            + ...
+        + Timestamp.uavcan          <-- Definition of data type "uavcan.Timestamp", default data type ID is not assigned
+    ```
+
+---
+
+##### <b><u>Syntax</u>:</b>
+
+- A data structure definition consists of `attributes` and `directives`. Any line of the definition file may contain at most one attribute definition or at most one directive. The same line cannot contain an attribute definition and a directive at the same time.
+
+- An `Attribute` can be either of the following:
+  
+  - <b>Field</b>: A variable that can be modified by the application and exchanged via the network.
+  
+  - <b>Constant</b>: An immutable value that does not participate in network exchange.
+
+- A `Directive` is a statement that provides instructions to the DSDL compiler.
+
+- A DSDL definition for a message data type may contain only the following:
+  
+  - Attribute definitions (zero or more)
+  - Directives (zero or more)
+  - Comments (optional)
+
+<b><u>Attribute Definition</u>:</b> 
+
+- Field definition patterns:   
+  
+  - ```bash
+    cast_mode field_type field_name
+    ```
+  
+  - ```bash
+    cast_mode field_type[X] field_name
+    ```
+  
+  -     cast_mode field_type[<X] field_name
+  
+  - ```bash
+    cast_mode field_type[<=X] field_name
+    ```
+  
+  - ```bash
+    void_type
+    ```
+
+- Constant definiton patterns:
+  
+  - ```bash
+    cast_mode constant_type constant_name = constant_initializer
+    ```
+
+- Discussion of Each Component:
+  
+  - <b><u>Field Type</u></b>: can be either a primitive data type or a nested data structure.
+    
+    - A `primitive data type` can be referred simply by name, e.g., `float16`, `bool`.
+    
+    - A field type name can be appended with a statement in square brackets to define an array:
+      
+      - Syntax `[X]` is used to define a static array of size exactly X items.
+      - Syntax `[<X]` is used to define a dynamic array of size from 0 to X-1 items, inclusively.
+      - Syntax `[<=X]` is used to define a dynamic array of size from 0 to X items, inclusively.
+      - Arrays of maximum size with less than one item are not allowed. Multidimensional arrays are not allowed.
+  
+  - <b><u>Field Name & Constant Name</u>:</b> For a message data type, all attributes must have a unique name within the data type.
+  
+  - <b><u>Cast Mode</u>:</b> defines the rules of conversion from the native value of a certain programming language to the serialized field value.
+    
+    - Cast mode may be left undefined, in which case the default will be used.
+    
+    - Cast modes are given below:
+      
+      - <b>Saturated</b>: is the default cast mode, which will be used if the attribute definition does not specify the cast mode explicitly.
+        
+        - For `integers`, it prevents an integer overflow - for example, attempting to write 0x44 to a 4-bit field will result in a bitfield value of 0x0F.
+        
+        - For `floating point` values, it prevents overflow when casting to a lower precision floating point representation - for example, 65536.0 will be converted to a `float16` as 65504.0
+      
+      - <b>Truncated:</b> For integers, it discards the excess most significant bits - for example, attempting to write 0x44 to a 4-bit field will produce 0x04.
+        
+        - For floating point values, overflow during downcasting will produce an infinity.
+  
+  - <b><u>Constant Definition</u>:</b> 
+    
+    - A constant must be a primitive scalar type (i.e., arrays and nested data structures are not allowed as constant types).
+    
+    - A constant must be assigned with a constant initializer, which must be one of the following:
+      
+      - Integer zero (0).
+      - Integer literal in base 10, starting with a non-zero character. E.g., 123, -12.
+      - Integer literal in base 16 prefixed with `0x`. E.g., 0x123, -0x12, +0x123.
+      - Integer literal in base 2 prefixed with `0b`. E.g., 0b1101, -0b101101, +0b101101.
+      - Integer literal in base 8 prefixed with `0o`. E.g., 0o123, -0o777, +0o777.
+      - Boolean `true` or `false`.
+  
+  - <b><u>Void Type</u>:</b> is a special field type that is intended for data alignment purposes. The specification defines 64 distinct void types as follows:
+    
+    - `void1` - 1 padding bit;
+    
+    - `void2` - 2 padding bits;
+    
+    - ....
+    
+    - `void63` - 63 padding bits;
+    
+    - `void64` - 64 padding bits;
+    
+    - A field of type void does not have a name and its cast mode cannot be specified.During message serialization, all void fields must be populated with zero bits; during deserialization, contents of the void fields should be ignored.
+
+---
+
+#### <u>Primitive Data Types</u>
+
+| Name    | Bit Length | Possible representation in C/C++      | Value range           | Binary representation                                         |
+|:-------:|:----------:|:-------------------------------------:|:---------------------:|:-------------------------------------------------------------:|
+| bool    | 1          | bool                                  | {0,1}                 | One Bit                                                       |
+| intX    | 2 ≤ X ≤ 64 | int8_t, int16_t, int32_t, int64_t     | [-(2^X)/2, 2^X/2 - 1] | Two's Complement                                              |
+| uintX   | 2 ≤ X ≤ 64 | uint8_t, uint16_t, uint32_t, uint64_t | [0, 2^X - 1]          |                                                               |
+| float16 | 16         | float                                 | ±65504                |                                                               |
+| float32 | 32         | float                                 | Approx. ±1039         |                                                               |
+| float64 | 64         | double                                | Approx. ±10308        |                                                               |
+| voidX   | 1 ≤ X ≤ 64 |                                       |                       | X zero bits (set to zero when encoding, ignore when decoding) |
+
+----
+
+#### <u>Naming Rules</u>
+
+- Field names, constant names, and type names must contain only `ASCII alphanumeric characters` and `underscores ([A-Za-z0-9_]`), and must begin with an `ASCII alphabetic character ([A-Za-z]`).
+
+- Violation of this rule must be detected by the DSDL compiler and treated as a fatal error.
+
+- <b><u>Optional</u></b>:
+  
+  - Field and namespace names should be all-lowercase words separated with underscores, and may include numbers, (e.g.: `field_name`, `my_namespace_7`).
+  
+  - Constant names should be all-uppercase words separated with underscores, and may include numbers (e.g.: `CONSTANT_NAME`).
+  
+  - Data type names should be in `camel case` and may include numbers (e.g.: `TypeName`, `TypeName2`).
+
+---
+
+#### <u>Data Type Compatibility</u>
+
+- <b>The Concept of Data Type Compatibility:</b> It is vital that all nodes exchanging some particular data structure use compatible DSDL definitions of it.
+  
+  - <b><u>Binary Layout</u>:</b> This implies that compatible data structures must have the `same field types in the same order`, as shown in the following example,
+    
+    - First definition:
+      
+      ```
+      uint8 a
+      uint8 b
+      ```
+    
+    - Second definition:
+      
+      ```
+      uint12 a
+      uint4 b
+      ```
+    
+    - Even though the bit length of the data structures above is the same, the binary layout is clearly not compatible.
+    
+    - **Example for compatible data type,**
+    
+    - First definition:
+      
+      ```
+      uint8 a
+      uint8 b
+      ```
+    
+    - Second definition:
+      
+      ```
+      uint8 a
+      uint8 b
+      ```
+    
+    - Both definitions have the same field types in the same order. Therefore, they have the same binary layout and can be interpreted correctly by both nodes.
+  
+  - <b><u>Field Name & Order</u></b>: This implies that compatible data structures must have the `same field types and names in the same order`.
+    
+    - First definition:
+      
+      ```
+      uint8 a
+      uint8 b
+      ```
+    
+    - Second definition:
+      
+      
+      ```
+      uint8 b
+      uint8 a
+      ```
+    
+    - Even though the first and the second definitions share the same binary layout (two fields of type `uint8`), `they feature different field names and therefore are semantically incompatible`.
+
+---
