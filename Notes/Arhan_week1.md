@@ -394,7 +394,7 @@
     cast_mode field_type[X] field_name
     ```
   
-  -     cast_mode field_type[<X] field_name
+  - cast_mode field_type[<X] field_name
   
   - ```bash
     cast_mode field_type[<=X] field_name
@@ -551,12 +551,9 @@
     
     - Second definition:
       
-      
-      ```
       uint8 b
       uint8 a
-      ```
-    
-    - Even though the first and the second definitions share the same binary layout (two fields of type `uint8`), `they feature different field names and therefore are semantically incompatible`.
+
+Even though the first and the second definitions share the same binary layout (two fields of type `uint8`), `they feature different field names and therefore are semantically incompatible`.
 
 ---
