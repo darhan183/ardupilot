@@ -122,3 +122,11 @@
         - <b><u>Large Propellers</u></b>: It generates more lift but requires low KV motors.
         
         - <b><u>Small Propellers</u>:</b> Spin faster with a high KV motor and are used for drones where speed is required.
+     
+     4. <b><u>Voltage(V)</u>:</b> refers to the electrical potential (current) supplied to the drone motor from the battery. It determines how fast and how efficiently a motor can operate.
+        
+        - Each drone motor has a recommended voltage (7.4 V to 22.2 V) and must match with drone's battery type.
+     
+     5. <b><u>Power(W)</u>:</b> The power of a drone motor refers to the amount of electrical energy converted into mechanical output and is measured in `Watts (W)`.
+        
+        - <b><u>High Power Modes</u>:</b> 
