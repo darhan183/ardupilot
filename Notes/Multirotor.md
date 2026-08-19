@@ -125,22 +125,13 @@
         
         - <b><u>Small Propellers</u>:</b> Spin faster with a high KV motor and are used for drones where speed is required.
      
-<<<<<<< Updated upstream
-     4. <b><u>Voltage(V)</u>:</b> refers to the electrical potential (current) supplied to the drone motor from the battery. It determines how fast and how efficiently a motor can operate.
-=======
-     4. <b><u>Voltage(V)</u>:</b > Voltage refers to the electrical potential (current) supplied to the drone motor from the battery. It determines how fast and how efficiently a motor can operate.
->>>>>>> Stashed changes
-        
-        - Each drone motor has a recommended voltage (7.4 V to 22.2 V) and must match with drone's battery type.
+     4. ****<u>Voltage(V)</u>:**** Voltage refers to the electrical potential (current) supplied to the drone motor from the battery. It determines how fast and how efficiently a motor can operate.Each drone motor has a recommended voltage (7.4 V to 22.2 V) and must match with drone's battery type.
      
-     5. <b><u>Power(W)</u>:</b> The power of a drone motor refers to the amount of electrical energy converted into mechanical output and is measured in `Watts (W)`.
+     5. ****<u>Power(W)</u>:**** The power of a drone motor refers to the amount of electrical energy converted into mechanical output and is measured in `Watts (W)`.
         
-<<<<<<< Updated upstream
-        - <b><u>High Power Modes</u>:</b> 
-=======
-        - <b>High Power Motors:</b> It deliver greater thrust and supports large propellers, which makes them ideal for heavy lift drones.
+        - ****High Power Motors:**** It deliver greater thrust and supports large propellers, which makes them ideal for heavy lift drones.
         
-        - <b>Low Power Motors</b>: it consume less energy and are suitable for lightweight drones that require long flight times.
+        - <b>Low Power Motors</b>: it consume less energy and are suitable for lightweight drones that require long flight time.
 
 ---
 
@@ -198,8 +189,11 @@
 4. <b><u>Global Navigation Satellite System(GNSS)</u>:</b> [Global Navigation Satellite System [Explained]](https://www.advancednavigation.com/tech-articles/global-navigation-satellite-system-gnss-and-satellite-navigation-explained/)
    
    - A `GNSS` consists of a constellation of satellites orbiting the earth in very specific trajectories. For global coverage, it is estimated that a constellation requires 18 to 30 satellites.
+   
    - Navigation satellites provide orbit information and accurate timing to radio receivers specifically designed to receive those satellite signals and decode the signal message contents.
+   
    - GNSS is often generically referred to as `GPS (Global Positioning System)` but that acronym actually refers specifically to the United States constellation.
+   
    - There are several GNSS constellations provided by governments around the world, including:
      
      | GNSS         | Country        |
@@ -241,6 +235,3 @@
     - <b>GLONASS:</b> `L1 – 1602.0 MHz`, `L2 – 1246.0 MHz` and `L3 – 1202.025 MHz`
     
     - **Galileo:** `E1 – 1575.42 MHz`, `E5a – 1176.45 MHz`, `E5b – 1207.14 MHz` and `E6 – 1278.75 MHz`
-
-- 
->>>>>>> Stashed changes
