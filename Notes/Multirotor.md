@@ -234,4 +234,50 @@
     
     - <b>GLONASS:</b> `L1 – 1602.0 MHz`, `L2 – 1246.0 MHz` and `L3 – 1202.025 MHz`
     
-    - **Galileo:** `E1 – 1575.42 MHz`, `E5a – 1176.45 MHz`, `E5b – 1207.14 MHz` and `E6 – 1278.75 MHz`
+    - **Galileo:** `E1 – 1575.42 MHz`, `E5a – 1176.45 MHz`, `E5b – 1207.14 MHz` and `E6 – 1278.75 MHz`.
+
+---
+
+5. <b><u>Inertial Measurement Unit(IMU)</u>:</b> [What is an IMU and what is it used for? | UAV Navigation](https://www.uavnavigation.com/products/ahrs-imu/what-is-an-imu)
+   
+   - is a device able to measure and report attitude (roll, pitch and yaw), velocity, changes in altitude and gravitational forces acting on an aircraft.
+   
+   - Inside the drone, it is a small chip mounted on the flight controller board that combines two kinds of sensor:
+     
+     - <b>A three-axis accelerometer:</b> This measures linear acceleration — how fast the drone is speeding up or slowing down along its X, Y, and Z axes, including the constant downward pull of gravity.
+     
+     - <b>A three-axis gyroscope:</b> This measures rotational rate — how fast the drone is rotating around each of its three axes(Roll, Pitch, Yaw).
+   
+   - <b>Components of an IMU:</b> An IMU is typically composed of:
+     
+     1. <b><u>Accelerometers</u>:</b> It serves as the tool for velocity measurement on an IMU. It can only measure pitch and roll, but cannot measure the yaw.
+     
+     2. <b><u>Gyroscopes</u>:</b> It serves as the tool for rotation/rotational rate measurement on an IMU.
+     
+     3. <b><u>Magnetometer</u>:</b> It serves as the tool for gravitational force measurement on an IMU, it can measure the Yaw but not pitch & roll.
+
+---
+
+6. <b><u>Telemetry</u>:</b> transmits real-time flight data (GPS, altitude, battery, attitude, signal strength) from UAV to GCS.
+   
+   - It is the automated, real-time process of collecting flight data from onboard sensors and transmitting it wirelessly to a GCS.
+   
+   - It is the continuous exchange of state, health, and sensor information between a flying platform and its control and analytics back-end.
+   
+   - Telemetry allow the GCS to send information back to the drone, like changing parameters or sending commands.
+
+---
+
+7. <b><u>Gimbal</u>:</b> [What is a gimbal? An easy-to-understand explanation of its mechanism, types, and how to use it for beginners - DJI Global or Other Regions](https://www.dji.com/global/media-center/insights/what-is-gimbal)
+   
+   - A gimbal is a device that holds a camera or smartphone in place, designed for maintaining a constant level while reducing shaking. Its built-in sensors and motors detect and instantly correct movements of camera.
+   
+   - 
+   
+   - <b>Basic Structure of Gimbal:</b> 
+     
+     1. <b><u>Rotation Axis(2nd axis/3rd axis)</u>:</b> It corrects tilt and rotation of the camera. Two-axis only corrects `up/down(Tilt) and left/right(Pan)`, while three-axis can also correct `rotation (roll)`.
+     
+     2. <b><u>Motor</u>:</b> The power to instantly counteract detected vibrations.
+     
+     3. <b><u>IMU Sensor</u>:</b> It detects the gimbal's motion and orientation by measuring angular rotation and acceleration. The gimbal controller uses this information to determine unwanted movement and commands the motors to compensate for it, keeping the camera stable.
