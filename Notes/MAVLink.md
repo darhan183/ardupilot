@@ -10,7 +10,7 @@
     
     - Data Streams are sent/published as topics while configuration sub-protocols such as `mission-protocol` or `parameter protocol` are `point to point` with retransmission.
   
-  - MAVLink messages can be sent over almost any serial connection & does not defined within `XML files`.
+  - MAVLink messages can be sent over almost any serial connection.
   
   - Messages are defined within `XML files`.
     
@@ -20,9 +20,9 @@
   
   - <b><u>Message Format</u></b>:- 
     
-    <img title="" src="file:///home/darhan/snap/marktext/9/.config/marktext/images/2026-07-06-17-25-50-image.png" alt="" width="677">
+    <img src="file:///home/d.arhan/Pictures/Screenshots/Screenshot%20from%202026-07-06%2017-25-46.png" title="" alt="Screenshot from 2026-07-06 17-25-46.png" width="724">
     
-                                                    FIG-1 MAVLink 1 Message Format
+                                       FIG-1 MAVLink 1 Message Format
 
 | Byte Index     | Content                       | Value         | Explanation                                                                                      |
 |:--------------:|:-----------------------------:|:-------------:|:------------------------------------------------------------------------------------------------:|
@@ -34,8 +34,6 @@
 | 5              | Message ID                    | 0-255         | ID of the message - the ID defines what the payload "means" & how it should be correctly decoded |
 | 6 to (n+6)     | Data                          | (0-255) bytes | Data of the message, depends on the message ID.                                                  |
 | (n+7) to (n+8) | Checksum(Low byte, high byte) | -             | -                                                                                                |
-
-<b><u>MAVLink 2 Message Format</u></b>:-
 
 #### <u>MAVLink(v1) vs MAVLink(v2)</u>:-
 
@@ -65,3 +63,58 @@
 - The protocol introduced standardized error-checking (checksums). If a radio glitch corrupts a command packet, the drone detects it instantly and ignores the bad data to prevent crashes.
 
 ---
+
+### <u>MAVLink Versions</u>
+
+- Currently `MAVLink Version = MAVLink 2.0`, also supports `MAVLink 1.0`.
+
+- <b><u>Determining Protocol/Message Version</u>:</b> 
+  
+  - The major version can be determined from the packet start marker byte:
+    
+    - MAVLink 1: `0xFE`
+    - MAVLink 2: `0xFD`
+
+---
+
+### <u>MAVLink 2</u>
+
+- The new features of `MAVLink 2` are:
+  
+  - **24 bit message ID**: Allows over 16 million unique message definitions in a dialect (MAVLink 1 was limited to 256).
+  
+  - <b>Packet Signing</b> : Authenticate that messages were sent by trusted systems.
+  
+  - **Message Extensions:** Add new fields to existing MAVLink message definitions without breaking binary compatibility for receivers that have not updated.
+  
+  - **Empty-byte Payload Truncation:** Empty (zero-filled) bytes at the end of the serialized payload must be removed before sending.
+  
+  - **Compatibility/Incompatibility Flags:** Packets with compatibility flags can still be handled in the standard way, while packets with incompatibility flags must be dropped if the flag is not supported.
+
+- <b><u>Message/Packet Signing</u>:</b> 
+  
+  - <b>Frame Format</b>:  For a signed packet the **0x01** bit of the `incompatibility flag field` is set true and an additional 13 bytes of `signature` data appended to the packet.
+    
+    ![](/home/d.arhan/Pictures/Screenshots/2026-08-20-21-18-14-image.png)
+    
+        Fig2: MAVLink 2 Frame Format
+  
+  - The 13 bytes of signature are:
+  
+  | Data               | Description                                                                                 |
+  | ------------------ | ------------------------------------------------------------------------------------------- |
+  | linkID(8 Bits)     | ID of link on which packet is sent.                                                         |
+  | timestamp(48 Bits) | This must monotonically increase for every message on a particular link.                    |
+  | signature(48 Bits) | A 48 bit signature for the packet, based on the complete packet, timestamp, and secret key. |
+  
+  - <u><b>Link IDs:</b></u>  The 8 bit link ID is provided to ensure that the signature system is robust for multi-link MAVLink systems.
+    
+    - Each implementation should assign a `link ID` to each of the MAVLink communication channels it has enabled and should put this ID in the link wID field.
+    
+    - The monotonically increasing timestamp rule is applied separately for each logical stream, where a stream is defined by the tuple:
+      
+      ```bash
+      (SystemID,ComponentID,LinkID)
+      ```
+  
+  - <b><u>Signature</u>:</b> 
