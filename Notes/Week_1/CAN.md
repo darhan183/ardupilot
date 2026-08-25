@@ -1,0 +1,63 @@
+### Controller Area Network: https://www.csselectronics.com/pages/can-bus-simple-intro-tutorial
+
+- <b>What is CAN bus ?</b>
+  
+  - CAN Bus is a communication system used in vehicle/machines to enable `Electronic Control Units(ECU)` to communicate with each other without a host computer. For example, the `CAN bus` enables quick and reliable sharing of information between your car's brakes and engine.
+  -  All ECUs are connected on a two-wire bus consisting of a twisted pair: `CAN high` and `CAN low`.
+  
+  ![Screenshot from 2026-08-11 21-15-08.png](/home/d.arhan/Pictures/Screenshots/Screenshot%20from%202026-08-11%2021-15-08.png)
+
+- <b><u>CAN Bus DB9 Connector</u>:</b>
+  
+  - The CAN DB9 (D-sub 9) connector is used to connect a data logger or interface to the CAN bus.
+  
+  ![Screenshot from 2026-08-11 21-20-40.png](/home/d.arhan/Pictures/Screenshots/Screenshot%20from%202026-08-11%2021-20-40.png)
+
+- <b><u>CAN Bus Variants</u>:</b> 
+  
+  | Property              | Low-speed CAN<br/>(Fault Tolerance CAN)                            | Classical CAN 2.0<br/>(High-speed CAN)                   | CAN FD<br/>(Flexible Data-rate)        | CAN XL                                 |
+  |:---------------------:|:------------------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------:|:--------------------------------------:|
+  | Max Baud Rate Speed   | 0.125 Mbit/s                                                       | 1 Mbit/s                                                 | 8 Mbit/s                               | 20 Mbit/s                              |
+  | Max Data Payload Size | 8 bytes                                                            | 8 Bytes                                                  | 64 Bytes                               | 2048 Bytes                             |
+  | Baud Rate Type        | Fixed                                                              | Fixed                                                    | Variable(Faster Data Field)            | Variable(Higher Rates)                 |
+  | Key Feautres          | Fault tolerant operation, continue even if one bus line is damaged | Low cost, robust error detection, most commonly deployed | Increased payload, speed & reliability | Increased payload, speed & reliability |
+
+- <b><u>CAN Physical & Data Link Layer</u>:</b>  The controller area network is described by a `data link layer`  & `physical layer`.
+  
+  - <u><b>Physical Layer</b></u>: The CAN bus `physical layer` defines cable types, electrical signal level, node requirements etc. For example,
+    
+    - <u>Baud Rate:</u> Nodes must be connected via a two-wire bus with baud rates up to 1 Mbit/s (Classical CAN) or 8 Mbit/s  (CAN FD)
+    
+    - <u>Cable Length:</u> Maximal CAN cable lengths should be between 500 meters (125 kbit/s) and 40 meters (1 Mbit/s).
+  
+  - <u><b>Data Link Layer</b></u>: The CAN bus `Data Link Layer` defines CAN Frame Formats, error handling, data transmission & helps ensure data integrity.
+    
+    - For example, the data link layer specifies:
+      
+      - <u>Frame Formats</u>:Four types (data frames, remote frames, error frames, overload frames) and 11-bit/29-bit identifiers.
+      
+      - <u>Error Handling</u>: Methods for detecting/handling CAN errors including CRC, acknowledgement slots, error counters.
+    
+    <img src="file:///home/d.arhan/Pictures/Screenshots/Screenshot%20from%202026-08-11%2021-49-14.png" title="" alt="Screenshot from 2026-08-11 21-49-14.png" width="480">
+
+- <b><u>CAN Frame</u>:</b> 
+  
+  <img src="file:///home/d.arhan/Pictures/Screenshots/Screenshot%20from%202026-08-12%2013-45-45.png" title="" alt="Screenshot from 2026-08-12 13-45-45.png" width="519">
+  
+  - The CAN date frame fields are given below:
+    
+    - <b><u>Start Of Frame(SOF)</u>:</b> is a `dominant 0` to tell the other nodes that a CAN node intends to talk.
+    
+    - <b><u>ID</u>:</b> is the frame identifier - lower values have higher priority.
+    
+    - <b><u>Remote Transmission Request(RTR)</u>:</b>  indicates whether a node sends data or requests dedicated data from another node.
+    
+    - <b><u>Control</u>:</b> contains the `Identifier Extension Bit (IDE)` which is a `dominant 0` for 11-bit. It also contains the `4 bit Data Length Code (DLC)` that specifies the length of the data bytes to be transmitted (0 to 8 bytes).
+    
+    - <b><u>Data</u>:</b> contains the data bytes aka payload, which includes CAN signals that can be decoded for information.
+    
+    - <b><u>Cyclic Redundancy Check(CRC)</u>:</b> is used to ensure data integrity.
+    
+    - <b><u>Acknowledgement(ACK)</u>:</b>  slot indicates if the node has acknowledged and received the data correctly.
+    
+    - <b><u>End of Frame(EOF)</u>:</b> marks the end of the CAN frame. 

@@ -1,0 +1,281 @@
+#### <u>Multirotor</u>: [Multirotor - Wikipedia](https://en.wikipedia.org/wiki/Multirotor)
+
+- A multirotor is a rotorcraft with more than two lift-generating rotors separated horizontally.
+
+- An advantage of multirotor aircraft is the simpler rotor mechanics required for flight control.
+
+- They control vehicle motion by varying the relative speed of each rotor to change the thrust and torque produced by each.
+
+- Due to their ease of both construction and control, multirotor aircraft are frequently used in `radio control aircraft` and `Unmanned Aerial Vehicle (UAV)` projects. For example: Tricopter, Quadcopter, hexacopter , octocopter etc.
+
+#### <u>Subsystems of Multirotor</u>: [Drone Flight Controllers: A Comprehensive Guide | Grepow](https://www.grepow.com/blog/what-is-a-drone-flight-controller.html)
+
+1. <b><u>Flight Controller Unit</u></b>:
+   
+   - UAV are complex systems that rely on several components to achieve stable flight and perform various functions.
+   
+   - Among these components, <b>the flight controller plays a critical role, acting as the `Brain`</b> of the drone that interprets data from various sensors and translates pilot commands into motor actions.
+   
+   - A `Flight Controller (FC)` is the central processing unit of a drone.
+   
+   -  It integrates sensors, software, and communication modules to control the drone’s flight and stability.
+   
+   - Core responsibilities of a flight controller include:
+     
+     - <b>Stabilizing flight</b>: Using gyroscopes and accelerometers, the FC ensures the drone remains balanced and level during flight.
+     
+     - <b>Processing input commands</b>: It interprets commands from the remote control or autopilot system and adjusts the drone’s motors accordingly.
+     
+     - <b>Navigation</b>: Some flight controllers incorporate GPS for autonomous navigation and return-to-home functionality.
+     
+     - <b>Data integration</b>: They communicate with external systems such as cameras, payloads, or telemetry modules.
+   
+   - Flight controllers often run on specialized firmware like Betaflight, ArduPilot, or PX4, which enable features ranging from basic stability to advanced autonomous flight.
+   
+   - <B><u>The Relationship between Drone Flight Controllers and Related Software</u></B>:
+     
+     - The flight controller is the physical hardware component that receives sensor data, processes it, and sends commands to the motors.
+     
+     - The software, often referred to as firmware or flight control software, is the digital brain that runs on the flight controller, interpreting sensor data, executing flight algorithms, and controlling the drone's movements.
+     
+     - <b>Software Provides Operational Rules:</b> The firmware on the flight controller dictates how it processes sensor inputs, interprets pilot commands, and adjusts motor outputs.
+     
+     - <b>Customization and Upgrades:</b> Flight controller software allows users to customize flight characteristics (e.g., sensitivity, flight modes) and enables firmware updates for improved performance or added features.
+     
+     - <b>Communication and User Interface:</b> Software enables users to interact with the FC through configuration tools, tuning parameters, and troubleshooting.
+     
+     - <b>Autonomy and Advanced Functions:</b> For UAVs with autonomous capabilities, the software handles waypoint navigation, obstacle avoidance, and other complex tasks by processing GPS data and sensor feedback.
+   
+   ---
+
+2. <b><u>Motors</u>:</b> [Drone Motors Explained: What They Are, Types &amp; Components](https://mechtex.com/blog/basic-of-drone-motor-what-they-are-their-types-and-their-components)
+   
+   - A drone motor is a specialised electric motor that generates the thrust required to lift the drone.
+   
+   - It converts electrical energy into mechanical energy and spins the propellers at high speed to create airflow to lift the drone.
+   
+   - The drone motors works with other components and forms an integrated propulsion system. The key components are:
+     
+     - <b>Motor(Brushed or Brushless Motor)</b>: Generates rotational force to spin propellers and lift the drone.
+     - <b>Propellers</b>: Attach to the shaft of the motor and generate thrust to lift the drone.
+     - <b>Electronic Speed Controller</b>: Controls the speed and direction of the drone motor through electrical signals.
+     - <b>Flight Controller</b>: Send commands to the ESC based on inputs from sensors and other algorithms for stable flight.
+   
+   - The drone motor is a DC motor which operates on direct current supplied by the batteries. It works by receiving the signal from the ESC (Electronic Speed Controller).
+     
+     - These signals convert direct current into a three-phase signal, which creates a rotating magnetic field in the stator.
+     - The permanent magnet in the rotor interacts with this magnetic field and starts rotation.
+     - Motor speed can vary with the help of PWM signals from the ESC to enable precise control and smooth flight.
+   
+   - <b>Types of Motors</b>: 
+     
+     <img src="https://mechtex.com/uploads/images/202401/image_750x_65aa6839d490a.jpg" title="" alt="Types of Drone Motor" width="470">
+     
+     - <b><u>Brushed DC Motor</u>:</b> This motor consists of stator, rotor, commutator and brushes.
+       
+       - These motors use carbon brushes and commutators to switch the current within the motor's winding. It energises the rotor winding and creates a magnetic field that causes rotation.
+       
+       - The brushed DC motors have low efficiency, limited life span, and generate more friction during operation.
+     
+     - <b><u>Brushless DC Motor</u></b>: This motor consists of stator, rotor and ESC (Electronic Speed Controller). It eliminates the use of brushes and commutators.
+       
+       - The ESC switch the direction of current and energises the stator coil in a specific sequence.
+       
+       - It creates a rotating magnetic field in the stator winding. The rotor interacts with the stator winding and causes the rotor to spin.
+       
+       - BLDC Motor provide high efficiency, high power-to-weight ratio, and low maintenance requirements, which makes them ideal for modern drones.
+       
+       - BLDC motors are categorised into two types:
+         
+         1. <b><u>Outrunner Motors</u></b>:  The rotor spins around the stator and generates high torque at low RPM, this design is ideal for drones lifting heavy payloads.
+         
+         2. <b><u>Inrunner Motor</u></b>: The rotor spins inside the stator winding and generates high RPM at low torque. This makes them ideal for fixed-wing drones where speed is a priority over torque.
+     
+     - <b><u>Coreless Motor</u></b>: are specialised form of brushed DC motor without an iron core in the rotor.
+       
+       - They are extremely lightweight motors and offer fast acceleration. It makes them suitable for small or micro drones, which are used for recreational purposes.
+     
+     - <b><u>Gimbal Motors</u>:</b> are used for stabilising the cameras used in drones.
+       
+       - These motors offer precise control over camera movement and high torque for effective stabilization.
+     
+     - <b><u>Tilt-Rotor Motors</u>:</b> are specialised motors that can be rotated to transition between horizontal and vertical flight modes.
+       
+       - The motor is mounted on the aircraft wing and is capable of tilting upward and downward.
+       
+       - The tilt-rotor motor allows the aircraft to take off and land vertically like a helicopter.
+   
+   - <b><u>Key Specification of Drone Motor</u>:</b> 
+     
+     1. <b><u>KV Rating(RPM per Volt)</u>:</b> The KV rating indicates how many revolutions per minute a BLDC motor will turn per volt of electricity without any load.
+        
+        - <b>High KV Rating Motors:</b> High KV motors (eg, 1000 KV to 2500 KV) spin faster and are ideal for racing drones where speed is the priority.
+        
+        - <b>Low KV Rating Motors:</b> Low KV rating motors (eg, 400 to 800 KV) spin slower but provide more torque, which makes them ideal for heavy lift drones that carry heavy payloads.
+     
+     2. <b><u>Thrust</u>:</b> is the amount of upward force the drone motor can generate with a given propeller.
+        
+        - The thrust of the motor must exceed the drone's weight for stable flight.
+        
+        -  A 2:1 thrust-to-weight ratio is recommended for smooth manoeuvring and payload support.
+     
+     3. <b><u>Propeller Size</u>:</b> The propeller size must match the motor KV, frame size, and battery voltage to optimise drone performance, flight time, and efficiency.
+        
+        - <b><u>Large Propellers</u></b>: It generates more lift but requires low KV motors.
+        
+        - <b><u>Small Propellers</u>:</b> Spin faster with a high KV motor and are used for drones where speed is required.
+     
+     4. ****<u>Voltage(V)</u>:**** Voltage refers to the electrical potential (current) supplied to the drone motor from the battery. It determines how fast and how efficiently a motor can operate.Each drone motor has a recommended voltage (7.4 V to 22.2 V) and must match with drone's battery type.
+     
+     5. ****<u>Power(W)</u>:**** The power of a drone motor refers to the amount of electrical energy converted into mechanical output and is measured in `Watts (W)`.
+        
+        - ****High Power Motors:**** It deliver greater thrust and supports large propellers, which makes them ideal for heavy lift drones.
+        
+        - <b>Low Power Motors</b>: it consume less energy and are suitable for lightweight drones that require long flight time.
+
+---
+
+3. <b><u>Electronic Speed Controller</u>:</b> [Electronic Speed Controllers (ESC): A Comprehensive Guide to Working, Features, Types and Applications.](https://mechtex.com/blog/a-comprehensive-guide-to-electronic-speed-controllers)
+- An `Electronic Speed Controller (ESC)` is an electronic device which controls the direction, speed, and braking of an electric motor.
+
+- It acts as a bridge between the power supply, the electric motor & the controller.
+
+<img src="file:///home/d.arhan/snap/marktext/9/.config/marktext/images/2026-08-19-16-43-58-image.png" title="" alt="" width="663"> 
+
+    Fig1: Connection Between ESC and Motor
+
+- Its main function is to manage the power supplied to the motor for rotation.It receives signals from controllers to adjust the power supply as per the requirement for smooth operation.
+
+- It regulates the power of the motor with the help of the `Pulse Width Modulation (PWM)` technique. In this technique, an `Electronic Speed Controller (ESC)` rapidly switches the power supply between ON & OFF to control the power supply to the motor.
+  
+  - Quick switching between ON & OFF means high power is delivered to the motor. Slow switching between ON & OFF results in less power being delivered to the motor.
+
+- <b><u>Components of Electronic Speed Controller</u>:</b> 
+  
+                                                                                                  <img title="" src="file:///home/d.arhan/snap/marktext/9/.config/marktext/images/2026-08-19-17-08-02-image.png" alt="" width="204">
+  
+      Fig2: Components of ESC
+  
+  1. <b><u>Microcontroller(MCU)</u>:</b> is the brain of `ESC`. It receives signals from other components to regulate the amount of power supply to the motor.
+  
+  2. <b><u>MOSFETs</u>:</b> It is a high speed electronic switch inside the ESC (Electronic Speed Controller). It rapidly switches between the ON & OFF to control the power supply.
+  
+  3. <b><u>Capacitors</u>:</b> It helps to stablise the voltage of the electric motor. It saves the small parts of energy and protect the Electronic Speed Controllers from the sudden failures.
+  
+  4. <b><u>Battery Elimination Circuit</u>:</b> It lowers the battery volatage to power control electronics.
+  
+  5. <b><u>Power Connectors</u>:</b> They act as a link between ESC, battery, electric motor and controller.
+  
+  6. <b><u>Firmware</u>:</b> is the software programmed into the ESC (Electronic Speed Controller). It regulates the speed, power, and responses from other components.
+
+- <b><u>Types of ESC</u>:</b> 
+  
+  ![](/home/d.arhan/Pictures/Screenshots/2026-08-19-19-19-26-image.png)
+  
+  1. <b><u>Brushed ESCs</u>:</b> control conventional `brushed DC motors`. They work by varying the voltage supplied to the motor and adjusting speed using Pulse Width Modulation (PWM).
+     
+     - These ESCs have lower efficiency and require frequent maintenance.
+  
+  2. <b><u>Brushless ESCs</u>:</b> In `BLDC Motors`, the Electronic Speed Controller (ESC) performs electronic commutation.
+     
+     - BLDC motors do not have brushes for commutaion, they use Electronic Speed Controllers to switch current between windings in proper sequence for smooth rotation.
+  
+  3. <b><u>Linear ESCs</u>:</b> 
+  
+  4. <b><u>Switching ESCs</u>:</b> 
+
+---
+
+4. <b><u>Global Navigation Satellite System(GNSS)</u>:</b> [Global Navigation Satellite System [Explained]](https://www.advancednavigation.com/tech-articles/global-navigation-satellite-system-gnss-and-satellite-navigation-explained/)
+   
+   - A `GNSS` consists of a constellation of satellites orbiting the earth in very specific trajectories. For global coverage, it is estimated that a constellation requires 18 to 30 satellites.
+   
+   - Navigation satellites provide orbit information and accurate timing to radio receivers specifically designed to receive those satellite signals and decode the signal message contents.
+   
+   - GNSS is often generically referred to as `GPS (Global Positioning System)` but that acronym actually refers specifically to the United States constellation.
+   
+   - There are several GNSS constellations provided by governments around the world, including:
+     
+     | GNSS         | Country        |
+     |:------------:|:--------------:|
+     | BeiDou       | China          |
+     | Galileo      | European Union |
+     | GLONASS      | Russia         |
+     | GPS          | United States  |
+     | IRNSS(NavIC) | India          |
+     | QZSS         | Japan          |
+- <b><u>The Primary use of GNSS</u>:</b> There are two primary uses for GNSS:
+  
+  - <b>Position Determination:</b> The position of an object is its latitude (distance from the equator), longitude (distance from the Greenwich meridian in the UK) and elevation above (or below) mean sea level. This is known as `absolute position`.  
+    
+    - The absolute position of a GNSS receiver can be determined when the signal from `four (or more) GNSS satellites` can be clearly received at the same time.
+    
+    - In **dynamic applications**, such as moving vehicles, when the position of the GNSS receiver is known over a period of time as the vehicle moves, tracking and navigation applications become possible.
+  
+  - <b>Timing</b>: The signals, sent over radio waves, from GNSS satellites have extremely accurate time stamps  encoded into them. This is enabled by the use of incredibly accurate atomic clocks on board each satellite.
+    
+    - Once the GNSS receiver has determined its position, the GNSS receiver synchronizes its <b>internal clock with the satellite clocks</b>.
+    
+    - By maintaining that synchronization, the GNSS receiver clock is then considered to have a very accurate timing source.
+
+- <b><u>Frequencies and Signals</u>:</b> 
+  
+  - The signals sent from the satellites in space to the GNSS receivers are complex and vary in structure and frequency.
+  
+  - Different frequencies are used to improve signal reliability, signal accuracy and system redundancy.
+  
+  - For example, some signal frequencies are better suited to pass through trees due to the different signal wavelengths.
+  
+  - Using multiple frequencies simultaneously, modern multi-frequency GNSS receivers can improve the position accuracy by measuring the difference in signal propagation through the atmosphere, and effectively remove it as a source of error.
+  
+  - GNSS Frequency are listed below:
+    
+    - <b>GPS</b>: `L1 – 1575.42 MHz`, `L2 – 1227.60 MHz` and `L5 – 1176.45 MHz`
+    
+    - <b>GLONASS:</b> `L1 – 1602.0 MHz`, `L2 – 1246.0 MHz` and `L3 – 1202.025 MHz`
+    
+    - **Galileo:** `E1 – 1575.42 MHz`, `E5a – 1176.45 MHz`, `E5b – 1207.14 MHz` and `E6 – 1278.75 MHz`.
+
+---
+
+5. <b><u>Inertial Measurement Unit(IMU)</u>:</b> [What is an IMU and what is it used for? | UAV Navigation](https://www.uavnavigation.com/products/ahrs-imu/what-is-an-imu)
+   
+   - is a device able to measure and report attitude (roll, pitch and yaw), velocity, changes in altitude and gravitational forces acting on an aircraft.
+   
+   - Inside the drone, it is a small chip mounted on the flight controller board that combines two kinds of sensor:
+     
+     - <b>A three-axis accelerometer:</b> This measures linear acceleration — how fast the drone is speeding up or slowing down along its X, Y, and Z axes, including the constant downward pull of gravity.
+     
+     - <b>A three-axis gyroscope:</b> This measures rotational rate — how fast the drone is rotating around each of its three axes(Roll, Pitch, Yaw).
+   
+   - <b>Components of an IMU:</b> An IMU is typically composed of:
+     
+     1. <b><u>Accelerometers</u>:</b> It serves as the tool for velocity measurement on an IMU. It can only measure pitch and roll, but cannot measure the yaw.
+     
+     2. <b><u>Gyroscopes</u>:</b> It serves as the tool for rotation/rotational rate measurement on an IMU.
+     
+     3. <b><u>Magnetometer</u>:</b> It serves as the tool for gravitational force measurement on an IMU, it can measure the Yaw but not pitch & roll.
+
+---
+
+6. <b><u>Telemetry</u>:</b> transmits real-time flight data (GPS, altitude, battery, attitude, signal strength) from UAV to GCS.
+   
+   - It is the automated, real-time process of collecting flight data from onboard sensors and transmitting it wirelessly to a GCS.
+   
+   - It is the continuous exchange of state, health, and sensor information between a flying platform and its control and analytics back-end.
+   
+   - Telemetry allow the GCS to send information back to the drone, like changing parameters or sending commands.
+
+---
+
+7. <b><u>Gimbal</u>:</b> [What is a gimbal? An easy-to-understand explanation of its mechanism, types, and how to use it for beginners - DJI Global or Other Regions](https://www.dji.com/global/media-center/insights/what-is-gimbal)
+   
+   - A gimbal is a device that holds a camera or smartphone in place, designed for maintaining a constant level while reducing shaking. Its built-in sensors and motors detect and instantly correct movements of camera.
+   
+   - <b>Basic Structure of Gimbal:</b> 
+     
+     1. <b><u>Rotation Axis(2nd axis/3rd axis)</u>:</b> It corrects tilt and rotation of the camera. Two-axis only corrects `up/down(Tilt) and left/right(Pan)`, while three-axis can also correct `rotation (roll)`.
+     
+     2. <b><u>Motor</u>:</b> The power to instantly counteract detected vibrations.
+     
+     3. <b><u>IMU Sensor</u>:</b> It detects the gimbal's motion and orientation by measuring angular rotation and acceleration. The gimbal controller uses this information to determine unwanted movement and commands the motors to compensate for it, keeping the camera stable.
